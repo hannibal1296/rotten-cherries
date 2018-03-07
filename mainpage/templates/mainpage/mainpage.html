@@ -1,0 +1,96 @@
+{% extends "mainpage/base.html" %}
+{% load static %}
+{% block main_page %}
+    <!-- Header -->
+    <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
+        <img class="w3-image" src="{% static 'mainpage/img/classroom.jpg' %}" alt="classroom" width="1500" height="700">
+        <div class="w3-display-middle" style="width:50%">
+            <div class="w3-bar w3-black">
+                <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Lecture');"><i
+                        class="fa fa-book w3-margin-right"></i>Lecture
+                </button>
+                <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Professor');"><i
+                        class="fa fa-address-book w3-margin-right"></i>Professor
+                </button>
+            </div>
+
+            <!-- Tabs -->
+            <div id="Lecture" class="w3-container w3-white w3-padding-16 myLink">
+                <h3>궁금한 강의를 찾아보세요 !</h3>
+                <form method="get" action="{% url 'search_lecture' %}" accept-charset="utf-8">
+                    <div class="w3-row-padding" style="margin:0 -16px;">
+                        <div class="w3-half">
+                            <label>강의명</label>
+                            {% if l_nothing %}
+                                <span style="color: red; margin-left: 30px;">강의명을 입력해주세요</span>
+                            {% endif %}
+                            <input name="search_lecture_box" class="w3-input w3-border" type="text"
+                                   placeholder="띄어쓰기 없이 입력하세요." required>
+                        </div>
+                    </div>
+                    <p>
+                        <button class="w3-button w3-dark-grey" type="submit">강의 검색</button>
+                    </p>
+                </form>
+            </div>
+
+            <div id="Professor" class="w3-container w3-white w3-padding-16 myLink">
+                <h3>교수님을 검색해보세요 !</h3>
+                <form method="get" action="{% url 'search_professor' %}" accept-charset="utf-8">
+                    <div class="w3-row-padding" style="margin:0 -16px;">
+                        <div class="w3-half">
+                            <label>교수님 성함</label>
+                            {% if p_nothing %}
+                                <span style="color: red; margin-left: 30px;">성함을 입력해주세요 !</span>
+                            {% endif %}
+                            <input name="search_professor_box" class="w3-input w3-border" type="text"
+                                   placeholder="띄어쓰기 없이 입력하세요." required>
+                        </div>
+                    </div>
+                    <p>
+                        <button class="w3-button w3-dark-grey" type="submit">교수님 검색</button>
+                    </p>
+                </form>
+            </div>
+
+            <div class="rate"></div>
+        </div>
+    </header>
+
+    <div id="map" style="width:70%; height:400px; margin: 50px auto"></div>
+
+    <script>
+        // Tabs
+        function openLink(evt, linkName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("myLink");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(linkName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+
+        // Click on the first tablink on load
+        document.getElementsByClassName("tablink")[0].click();
+        {% if prof %}
+            document.getElementsByClassName("tablink")[1].click();
+        {% endif %}
+
+    </script>
+
+{#    <script src="{% static 'mainpage/js/map.js' %} %}"></script>#}
+    <script>
+        var mapOptions = {
+            center: new naver.maps.LatLng(37.503447, 126.766092),
+            zoom: 11
+        };
+
+        var map = new naver.maps.Map('map', mapOptions);
+    </script>
+
+{% endblock main_page %}

@@ -1,0 +1,74 @@
+{% extends "mainpage/base.html" %}
+{% load static%}
+{% block rate %}
+
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:480px">
+    <h4 style="display: inline-block">{{lecture.l_name}} 평가하기</h4>
+
+    <article class="article" style="max-width: 480px; text-align: center;">
+        <form method="post" action="{% url 'rate' pk=lecture.l_id %}" accept-charset="utf-8">
+            <div class="w3-row-padding" style="margin:0 -16px;">
+                <div class="w3-half" style="width: 100%; text-align-last: center;">
+                    {% csrf_token %}
+
+                    <label>시험지수</label>
+                    <select name="exam_box" class="w3-input w3-border">
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5 selected>5</option>
+                    </select>
+                    <br>
+                    <label>퀴즈지수</label>
+                    <select name="quiz_box" class="w3-input w3-border">
+                        <option value=1 selected>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5 selected>5</option>
+                    </select>
+                    <br>
+                    <label>과제지수</label>
+                    <select name="hw_box" class="w3-input w3-border">
+                        <option value=1 selected>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5 selected>5</option>
+                    </select>
+                    <br>
+                    <label>출첵지수</label>
+                    <select name="att_box" class="w3-input w3-border">
+                        <option value=1 selected>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5 selected>5</option>
+                    </select>
+                    <br>
+                    <label>강의지수</label>
+                    <select name="lec_box" class="w3-input w3-border">
+                        <option value=1 selected>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5 selected>5</option>
+                    </select>
+                    <hr>
+                    <label>140자 후기</label>
+                    <textarea name="comment_box" cols="50" rows="4" minlength="10" maxlength="280" wrap="virtual"
+                              style="resize: none; vertical-align: top; border: 1px solid grey;"></textarea>
+                </div>
+            </div>
+            <p>
+                <button class="w3-button w3-dark-grey" type="submit"
+                        onclick="return confirm('정말 등록하시겠습니까? 추후 삭제는 어렵습니다.')">제출하기
+                </button>
+            </p>
+        </form>
+    </article>
+</header>
+
+
+{% endblock rate %}

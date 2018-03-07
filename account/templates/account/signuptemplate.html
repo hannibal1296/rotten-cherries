@@ -1,0 +1,54 @@
+{% extends "mainpage/base.html" %}
+{% load static %}
+{% block signup_page %}
+
+<!-- LIST -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:860px">
+	<div id="login" class="w3-container w3-white w3-padding-16">
+		<h3>SIGN UP</h3>
+		<form method="post" action="{% url 'make_signup' prev_url %}" accept-charset="utf-8">
+			<div class="w3-row-padding" style="margin:0 -16px;">
+				<div class="w3-half">
+					{% csrf_token %}
+					<label>아 이 디</label>
+					<input name="username_box" class="w3-input w3-border" type="text" placeholder="cherries1225" required>
+					<label>비밀번호</label>
+					<input name="pw_box" class="w3-input w3-border" type="password" placeholder="* * * * * * * * * * * *" required>
+					<label>이메일</label>
+					<input name="email_box" class="w3-input w3-border" type="text" placeholder="rottencherries@rotten.cherries" required>
+					<label>학번</label>
+					<input name="sid_box" class="w3-input w3-border" type="text" placeholder="2017123456" required>
+
+					<label>소속학부</label>
+					<select name="dept_box" class="w3-input w3-border" required>
+						<option value="0" selected>-- 소속학부 --</option>
+						{% for dept in dept_list %}
+						<option value="{{ dept }}">{{ dept }}</option>
+						{% endfor %}
+					</select>
+					<label>전공</label>
+					<select name="major_box" class="w3-input w3-border" required>
+						<option value="0" selected>-- 소속학과 --</option>
+						{% for major in major_list %}
+						<option value="{{major}}">{{major}}과</option>
+						{% endfor %}
+					</select>
+					<label>입학년도</label>
+					<input name="year_box" class="w3-input w3-border" type="text" placeholder="2017" required>
+				</div>
+			</div>
+			{% if already_id %}
+			<p style="color: red">!아이디가 중복됩니다!</p>
+			{% endif %}
+			{% if already_sid %}
+			<p style="color: red">학번이 중복됩니다! 이미 가입하신건 아닌지</p>
+			{% endif %}
+			{% if empty_slot %}
+			<p style="color: red">소속대학 또는 전공을 입력하지 않았습니다.</p>
+			{% endif %}
+			<p><button class="w3-button w3-dark-grey" type="submit">SIGN UP</button></p>
+		</form>
+	</div>
+</header>
+
+{% endblock signup_page %}

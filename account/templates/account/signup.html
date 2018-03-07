@@ -1,0 +1,23 @@
+{% extends "mainpage/base.html" %}
+{% load static %}
+{% block signup_page %}
+
+<!-- LIST -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:860px">
+    <div id="login" class="w3-container w3-white w3-padding-16">
+        <h3>SIGN UP</h3>
+        <form method="post" accept-charset="utf-8">
+            {% csrf_token %}
+            <p>{{ user_form.username.label }}</p>
+            <p>{{ user_form.username }}</p>
+            <p>{{ user_form.password.label }}</p>
+            <p>{{ user_form.password }}</p>
+            <p>{{ user_form.email.label }}</p>
+            <p>{{ user_form.email }}</p>
+            {{ student_form.as_p }}
+            <p><button class="w3-button w3-dark-grey" type="submit">SIGN UP</button></p>
+        </form>
+    </div>
+</header>
+
+{% endblock signup_page %}

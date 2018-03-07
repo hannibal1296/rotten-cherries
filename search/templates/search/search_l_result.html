@@ -1,0 +1,25 @@
+{% extends "mainpage/base.html" %}
+{% load static %}
+{% block search_l_result %}
+
+<!-- LIST -->
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:860px">
+  <h4>강의 검색 결과</h4>
+    {% if returns %}
+        {% for each in returns %}
+            <article class="article" style="max-width: 640px">
+                <a href="{% url 'detail' pk=each.0.l_id %}">
+                    <p>{{each.0.l_name}}</p>
+                    <p>{{each.3}}</p>
+                    <p>{{each.0.semester}}</p>
+                    <p>{{each.2}}</p>
+                    <hr/>
+                </a>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p> 강의 검색 결과가 없습니다.</p>
+    {% endif %}
+</header>
+
+{% endblock search_l_result %}

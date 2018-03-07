@@ -1,0 +1,35 @@
+{% extends "mainpage/base.html" %}
+{% load static %}
+{% block detail %}
+<header class="w3-display-container w3-content w3-hide-small" style="max-width:480px">
+	<h4 style="display: inline-block">{{lecture.l_name}}</h4>
+	
+	{% if user.is_authenticated %}
+	<span style="float: right; line-height: 3"><a href="{% url 'goto_rate' pk=lecture.l_id %}">평가하기</a></span>
+	{% endif %}
+	{# Course Info #}
+	<article class="article">
+		<p>{{ p_name}}</p>
+		<p>{{lecture_id}}</p>
+		<p>{{lecture.semester}}</p>
+		<p>학점 : {{lecture.l_credit}}</p>
+		<hr/>
+		<p>시험지수 : {{ avg_rating.0 }}</p>
+		<p>퀴즈지수 : {{ avg_rating.1 }}</p>
+		<p>과제지수 : {{ avg_rating.2 }}</p>
+		<p>출첵지수 : {{ avg_rating.3 }}</p>
+		<p>강의지수 : {{ avg_rating.4 }}</p>
+		<b>평균지수 : {{ avg_rating.5 }}</b>
+	</article>
+	{# Comment Section #}
+	{% if avg_rating %}
+		<article class="article">
+			<ul>
+				{% for each in comments %}
+					<li>{{each}}</li>
+				{% endfor %}
+			</ul>
+		</article>
+	{% endif %}
+</header>
+{% endblock detail %}

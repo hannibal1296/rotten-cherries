@@ -1,0 +1,27 @@
+{% extends "mainpage/base.html" %}
+{% load static %}
+{% block search_p_result %}
+
+<!-- LIST -->
+  <header class="w3-display-container w3-content w3-hide-small" style="max-width:860px">
+    <h4>교수님 검색 결과</h4>
+    {% if profs %}
+
+    {% for each in profs %}
+    <article class="article" style="max-width: 640px">
+      <p class="rate"></p>
+        <hr/>
+        <p>{{ each.1 }}</p>
+        <p>{{ each.2 }}</p>
+        <p>{{each.0.p_office_loc}}</p>
+        <p>{{each.0.p_office_num}}</p>
+        <p>{{each.0.p_email}}</p>
+        <hr/>
+    </article>
+    {% endfor %}
+    {% else %}
+    <p> 교수님 검색 결과가 없습니다.</p>
+    {% endif %}
+  </header>
+
+{% endblock search_p_result %}
