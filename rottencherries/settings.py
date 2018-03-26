@@ -2,6 +2,8 @@ import os
 from .settings_secret import secret_key
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Input your secret key made of 50 characters
+# SECRET_KEY = secret_key
 SECRET_KEY = secret_key
 DEBUG = True
 ALLOWED_HOSTS = []

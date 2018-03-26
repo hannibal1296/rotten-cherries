@@ -10,11 +10,29 @@
             {% csrf_token %}
             <p>{{ user_form.username.label }}</p>
             <p>{{ user_form.username }}</p>
+            {% if already_username %}
+                <p style="color: red">!아이디가 중복됩니다!</p>
+            {% endif %}
             <p>{{ user_form.password.label }}</p>
             <p>{{ user_form.password }}</p>
             <p>{{ user_form.email.label }}</p>
             <p>{{ user_form.email }}</p>
-            {{ student_form.as_p }}
+
+            <p>{{ student_form.s_id.label }}</p>
+            <p>{{ student_form.s_id }}</p>
+            {% if already_sid %}
+                <p style="color: red">학번이 중복됩니다! 이미 가입하신건 아닌지</p>
+            {% endif %}
+
+            <p>{{ student_form.s_d.label }}</p>
+            <p>{{ student_form.s_d }}</p>
+
+            <p>{{ student_form.s_m.label }}</p>
+            <p>{{ student_form.s_m }}</p>
+            {% if empty_slot %}
+                <p style="color: red">소속대학 또는 전공을 입력하지 않았습니다.</p>
+            {% endif %}
+
             <p><button class="w3-button w3-dark-grey" type="submit">SIGN UP</button></p>
         </form>
     </div>

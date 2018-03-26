@@ -8,7 +8,6 @@ git clone git://github.com/hannibal1296/rotten-cherries.git
 ```
 pip install djangorestframework
 
-pip install django-cors-headers
 ```
 
 ### Notice

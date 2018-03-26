@@ -4,19 +4,21 @@ from django import forms
 from django.shortcuts import reverse
 
 
-def sid_validator(value):
-    warning_sign = "학번이 올바르지 않습니다."
-    if len(value) != 10:
-        raise forms.ValidationError(warning_sign)
-    # students = Student.objects.all()
-    # for each in students:
-    #     if each.s_id == value:
-    #         raise forms.ValidationError(warning_sign)
+# def sid_validator(value):
+#     warning_sign1 = "학번이 올바르지 않습니다."
+#     warning_sign2 = "이미 학번이 등록되어있습니다."
+#     if len(value) != 10:
+#         raise forms.ValidationError(warning_sign1)
+#     students = Student.objects.all()
+#     for each in students:
+#         if each.s_id == value:
+#             raise forms.ValidationError(warning_sign2)
 
 
 class Student(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    s_id = models.CharField(unique=True, max_length=12, verbose_name="학번", validators=[sid_validator])
+    s_id = models.CharField(unique=True, max_length=12, verbose_name="학번")
+    # s_id = models.CharField(unique=True, max_length=12, verbose_name="학번", validators=[sid_validator])
     s_d = models.ForeignKey('Department', models.PROTECT, verbose_name="소속대학")
     s_m = models.ForeignKey('Major', models.PROTECT, verbose_name="전공")
     since_y = models.IntegerField(verbose_name="입학연도", help_text="e.g. 2018")
